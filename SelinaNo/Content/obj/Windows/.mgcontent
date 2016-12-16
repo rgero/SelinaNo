@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SourceFileCollection xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Profile>Reach</Profile>
+  <Platform>Windows</Platform>
+  <Config />
+  <SourceFiles>
+    <File>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/Sprites/Bex.png</File>
+    <File>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/Sprites/laser.png</File>
+    <File>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/Sprites/Selina.png</File>
+    <File>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/Sprites/title.png</File>
+    <File>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/Sounds/Explosion.wav</File>
+    <File>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/Sounds/Merh.wav</File>
+    <File>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/Sounds/Yum.wav</File>
+    <File>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/Fonts/scoreboardFont.spritefont</File>
+  </SourceFiles>
+</SourceFileCollection>

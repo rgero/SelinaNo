@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SourceFile>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/Sounds/Yum.wav</SourceFile>
+  <SourceTime>2015-05-12T08:27:22.7053639-04:00</SourceTime>
+  <DestFile>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/bin/Windows/Sounds/Yum.xnb</DestFile>
+  <DestTime>2016-12-15T21:59:08.702249-05:00</DestTime>
+  <Importer>WavImporter</Importer>
+  <ImporterTime>2016-03-30T02:36:08-04:00</ImporterTime>
+  <Processor>SoundEffectProcessor</Processor>
+  <ProcessorTime>2016-03-30T02:36:08-04:00</ProcessorTime>
+  <Parameters>
+    <Key>Quality</Key>
+    <Value>Best</Value>
+  </Parameters>
+  <Dependencies />
+  <BuildAsset />
+  <BuildOutput />
+</PipelineBuildEvent>

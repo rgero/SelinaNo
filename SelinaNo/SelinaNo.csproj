@@ -67,7 +67,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Becky.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="ControlScheme.cs" />
+    <Compile Include="SelinaNoGame.cs" />
     <Compile Include="GameConstants.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Program.cs" />

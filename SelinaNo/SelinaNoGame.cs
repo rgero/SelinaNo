@@ -11,7 +11,7 @@ namespace SelinaNo
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class Game1 : Game
+    public class SelinaNoGame : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
@@ -63,9 +63,11 @@ namespace SelinaNo
         //Declaring a simple vector2 for text alignment
         Vector2 size;
 
-
         //Declaring the initial GameState
         static GameState currentState = GameState.MainMenu;
+
+        //Declaring the keyboard or mouse
+        static ControlScheme currentControls = ControlScheme.Mouse;
 
         public static int Health
         {
@@ -89,7 +91,7 @@ namespace SelinaNo
             get { return selinaRect; }
         }
 
-        public Game1()
+        public SelinaNoGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -183,10 +185,25 @@ namespace SelinaNo
                 Exit();
 
             if (currentState == GameState.MainMenu)
+            {
                 if (Keyboard.GetState().IsKeyDown(Keys.Tab))
                 {
                     currentState = GameState.Playing;
                 }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.D1))
+                {
+                    Console.WriteLine("Key 1 pressed!");
+                    currentControls = ControlScheme.Mouse;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.D2))
+                {
+                    Console.WriteLine("Key 2 pressed!");
+                    currentControls = ControlScheme.Keyboard;
+                }
+
+            }
 
             if (currentState == GameState.Playing)
             {
@@ -197,9 +214,30 @@ namespace SelinaNo
 
 
                     // Selina Update Position based on mouse location
-                    MouseState mouse = Mouse.GetState();
-                    selinaRect.X = mouse.X - (selinaSprite.Width / (2 * GameConstants.RESIZE_FACTOR));
-                    selinaRect.Y = mouse.Y - (selinaSprite.Height / (2 * GameConstants.RESIZE_FACTOR));
+                    if (currentControls == ControlScheme.Mouse)
+                    {
+                        MouseState mouse = Mouse.GetState();
+                        selinaRect.X = mouse.X - (selinaSprite.Width / (2 * GameConstants.RESIZE_FACTOR));
+                        selinaRect.Y = mouse.Y - (selinaSprite.Height / (2 * GameConstants.RESIZE_FACTOR));
+                    } else if (currentControls == ControlScheme.Keyboard)
+                    {
+                        if (Keyboard.GetState().IsKeyDown(Keys.W))
+                        {
+                            selinaRect.Y -= GameConstants.MAX_SELINA_SPEED;
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.S))
+                        {
+                            selinaRect.Y += GameConstants.MAX_SELINA_SPEED;
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.A))
+                        {
+                            selinaRect.X -= GameConstants.MAX_SELINA_SPEED;
+                        }
+                        if (Keyboard.GetState().IsKeyDown(Keys.D))
+                        {
+                            selinaRect.X += GameConstants.MAX_SELINA_SPEED;
+                        }
+                    }
 
                     //Clamping Selina to the Screen
                     if (selinaRect.Left < 0)

@@ -17,13 +17,10 @@ namespace SelinaNo
         Rectangle drawRectangle;
         Random rand;
         bool alive = true;
-
         int counter = 0;
         int goalTime;
-
         float velocityX;
         float velocityY;
-
         SoundEffect soundeffect;
 
         public bool Active
@@ -69,11 +66,11 @@ namespace SelinaNo
                     soundeffect.Play();
                     counter = 0;
                     goalTime = rand.Next(2000, 5000);
-                    Vector2 target = new Vector2(Game1.SelinaHitBox.Center.X, Game1.SelinaHitBox.Center.Y);
-                    Projectile projectile = new Projectile(Game1.laserSprite, drawRectangle.Center.X,
+                    Vector2 target = new Vector2(SelinaNoGame.SelinaHitBox.Center.X, SelinaNoGame.SelinaHitBox.Center.Y);
+                    Projectile projectile = new Projectile(SelinaNoGame.laserSprite, drawRectangle.Center.X,
                                                             drawRectangle.Center.Y,
                                                             target);
-                    Game1.addProjectile(projectile);
+                    SelinaNoGame.addProjectile(projectile);
                 }
                 counter += gameTime.ElapsedGameTime.Milliseconds;
 

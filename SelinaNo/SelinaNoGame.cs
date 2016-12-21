@@ -50,6 +50,10 @@ namespace SelinaNo
         SpriteFont scoreboardFont;
         Vector2 scoreboardLoc = new Vector2(GameConstants.SCOREBOARD_X, GameConstants.SCOREBOARD_Y);
         Vector2 healthLoc = new Vector2(GameConstants.HEALTH_X, GameConstants.HEALTH_Y);
+        Vector2 controlDisplay = new Vector2(GameConstants.CONTROL_X, GameConstants.CONTROL_Y);
+
+        static string base_control_msg = "Press 1 for mouse, 2 for keyboard:\n";
+        static string complete_ctrl_msg = base_control_msg + "Currently Selected: Mouse";
 
         //Declaring Scoreboard
         static int score = 0;
@@ -193,13 +197,13 @@ namespace SelinaNo
 
                 if (Keyboard.GetState().IsKeyDown(Keys.D1))
                 {
-                    Console.WriteLine("Key 1 pressed!");
+                    complete_ctrl_msg = base_control_msg + "Currently Selected: Mouse";
                     currentControls = ControlScheme.Mouse;
                 }
 
                 if (Keyboard.GetState().IsKeyDown(Keys.D2))
                 {
-                    Console.WriteLine("Key 2 pressed!");
+                    complete_ctrl_msg = base_control_msg + "Currently Selected: Keyboard";
                     currentControls = ControlScheme.Keyboard;
                 }
 
@@ -369,7 +373,11 @@ namespace SelinaNo
                 string message = "Press Tab to Play!";
                 size = scoreboardFont.MeasureString(message);
                 spriteBatch.DrawString(scoreboardFont, message,
-                    new Vector2(GameConstants.SCREEN_WIDTH / 2 - size.X / 2, 3 * GameConstants.SCREEN_HEIGHT / 4), Color.White);
+                    new Vector2(GameConstants.SCREEN_WIDTH / 2 - size.X / 2, 3 * GameConstants.SCREEN_HEIGHT / 5), Color.White);
+                if (complete_ctrl_msg != null)
+                {
+                    spriteBatch.DrawString(scoreboardFont, complete_ctrl_msg, controlDisplay, Color.White);
+                }
             }
 
             if (currentState == GameState.LostNoHigh)

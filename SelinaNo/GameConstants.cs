@@ -24,8 +24,8 @@ namespace SelinaNo
         public const string HEALTH_PREFIX = "Health: ";
         public const int INITIAL_HEALTH = 100;
 
-        public const int CONTROL_X = 10;
-        public const int CONTROL_Y = SCREEN_HEIGHT - 60;
+        public const int CONTROL_X = SCREEN_WIDTH/2;
+        public const int CONTROL_Y = SCREEN_HEIGHT - 100;
 
         public const int MAX_SELINA_SPEED = 15;
     }

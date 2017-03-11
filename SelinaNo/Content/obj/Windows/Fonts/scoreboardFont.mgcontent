@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/Fonts/scoreboardFont.spritefont</SourceFile>
-  <SourceTime>2015-05-12T08:27:22.3959839-04:00</SourceTime>
-  <DestFile>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/bin/Windows/Fonts/scoreboardFont.xnb</DestFile>
-  <DestTime>2016-12-21T15:14:08.7570734-05:00</DestTime>
+  <SourceFile>C:/Users/gero/Personal_Projects/C#/Selina_No/SelinaNo/Content/Fonts/scoreboardFont.spritefont</SourceFile>
+  <SourceTime>2017-03-11T00:21:32.0245944-05:00</SourceTime>
+  <DestFile>C:/Users/gero/Personal_Projects/C#/Selina_No/SelinaNo/Content/bin/Windows/Fonts/scoreboardFont.xnb</DestFile>
+  <DestTime>2017-03-11T00:21:41.9447468-05:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2016-03-30T02:36:08-04:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

@@ -32,6 +32,12 @@ namespace SelinaNo
         Texture2D titleSprite;
         Rectangle titleRect;
 
+        //Pose Sprite
+        Texture2D leftPoseSprite;
+        Rectangle leftPoseRect;
+        Texture2D rightPoseSprite;
+        Rectangle rightPoseRect;
+
         #endregion
 
         //Declaring the List of Bex
@@ -142,6 +148,22 @@ namespace SelinaNo
                                       100,
                                       titleSprite.Width,
                                       titleSprite.Height);
+
+            leftPoseSprite = Content.Load<Texture2D>(@"Sprites\Pose");
+            float resizingFactor = ((float)GameConstants.SCREEN_HEIGHT / leftPoseSprite.Height);
+            leftPoseRect = new Rectangle(   -GameConstants.SCREEN_WIDTH / 6,
+                                        GameConstants.SCREEN_HEIGHT / 3,
+                                       (int)(resizingFactor * leftPoseSprite.Width),
+                                       (int)(resizingFactor * leftPoseSprite.Height)
+                                    );
+            rightPoseSprite = Content.Load<Texture2D>(@"Sprites\PoseRight");
+            rightPoseRect = new Rectangle(  (int)(3.5*GameConstants.SCREEN_WIDTH / 6),
+                                            GameConstants.SCREEN_HEIGHT / 3,
+                                            (int)(resizingFactor * leftPoseSprite.Width),
+                                            (int)(resizingFactor * leftPoseSprite.Height)
+                                    );
+
+
 
             //Loading the sound effects
             merhSound = Content.Load<SoundEffect>(@"Sounds\Merh");
@@ -369,14 +391,19 @@ namespace SelinaNo
             if (currentState == GameState.MainMenu)
             {
                 GraphicsDevice.Clear(Color.Black);
+                spriteBatch.Draw(leftPoseSprite, leftPoseRect, Color.White);
+                spriteBatch.Draw(rightPoseSprite, rightPoseRect, Color.White);
                 spriteBatch.Draw(titleSprite, titleRect, Color.White);
+                
                 string message = "Press Tab to Play!";
                 size = scoreboardFont.MeasureString(message);
                 spriteBatch.DrawString(scoreboardFont, message,
                     new Vector2(GameConstants.SCREEN_WIDTH / 2 - size.X / 2, 3 * GameConstants.SCREEN_HEIGHT / 5), Color.White);
                 if (complete_ctrl_msg != null)
                 {
-                    spriteBatch.DrawString(scoreboardFont, complete_ctrl_msg, controlDisplay, Color.White);
+                    Vector2 stringSize = scoreboardFont.MeasureString(complete_ctrl_msg);
+                    Vector2 controlLocation = new Vector2(GameConstants.CONTROL_X - stringSize.X / 2, GameConstants.CONTROL_Y);
+                    spriteBatch.DrawString(scoreboardFont, complete_ctrl_msg, controlLocation, Color.DodgerBlue);
                 }
             }
 

@@ -28,16 +28,6 @@ namespace SelinaNo
         //Declaring Laser Sprite
         public static Texture2D laserSprite;
 
-        //Title Sprite
-        Texture2D titleSprite;
-        Rectangle titleRect;
-
-        //Pose Sprite
-        Texture2D leftPoseSprite;
-        Rectangle leftPoseRect;
-        Texture2D rightPoseSprite;
-        Rectangle rightPoseRect;
-
         #endregion
 
         //Declaring the List of Bex
@@ -58,8 +48,11 @@ namespace SelinaNo
         Vector2 healthLoc = new Vector2(GameConstants.HEALTH_X, GameConstants.HEALTH_Y);
         Vector2 controlDisplay = new Vector2(GameConstants.CONTROL_X, GameConstants.CONTROL_Y);
 
-        static string base_control_msg = "Press 1 for mouse, 2 for keyboard:\n";
-        static string complete_ctrl_msg = base_control_msg + "Currently Selected: Mouse";
+        //Menu
+        TitleScreen titleScreen;
+
+        public static ControlScheme currentControls = ControlScheme.Mouse;
+
 
         //Declaring Scoreboard
         static int score = 0;
@@ -76,8 +69,7 @@ namespace SelinaNo
         //Declaring the initial GameState
         static GameState currentState = GameState.MainMenu;
 
-        //Declaring the keyboard or mouse
-        static ControlScheme currentControls = ControlScheme.Mouse;
+
 
         public static int Health
         {
@@ -108,6 +100,8 @@ namespace SelinaNo
 
             graphics.PreferredBackBufferHeight = GameConstants.SCREEN_HEIGHT;
             graphics.PreferredBackBufferWidth = GameConstants.SCREEN_WIDTH;
+
+            titleScreen = new TitleScreen();
 
         }
 
@@ -142,26 +136,7 @@ namespace SelinaNo
             //Loading Laser Sprite
             laserSprite = Content.Load<Texture2D>(@"Sprites\laser");
 
-            //Loading Title Sprite
-            titleSprite = Content.Load<Texture2D>(@"Sprites\title");
-            titleRect = new Rectangle(GameConstants.SCREEN_WIDTH / 2 - titleSprite.Width / 2,
-                                      100,
-                                      titleSprite.Width,
-                                      titleSprite.Height);
-
-            leftPoseSprite = Content.Load<Texture2D>(@"Sprites\Pose");
-            float resizingFactor = ((float)GameConstants.SCREEN_HEIGHT / leftPoseSprite.Height);
-            leftPoseRect = new Rectangle(   -GameConstants.SCREEN_WIDTH / 6,
-                                        GameConstants.SCREEN_HEIGHT / 3,
-                                       (int)(resizingFactor * leftPoseSprite.Width),
-                                       (int)(resizingFactor * leftPoseSprite.Height)
-                                    );
-            rightPoseSprite = Content.Load<Texture2D>(@"Sprites\PoseRight");
-            rightPoseRect = new Rectangle(  (int)(3.5*GameConstants.SCREEN_WIDTH / 6),
-                                            GameConstants.SCREEN_HEIGHT / 3,
-                                            (int)(resizingFactor * leftPoseSprite.Width),
-                                            (int)(resizingFactor * leftPoseSprite.Height)
-                                    );
+            titleScreen.LoadContent(this.Content);
 
 
 
@@ -212,22 +187,7 @@ namespace SelinaNo
 
             if (currentState == GameState.MainMenu)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Tab))
-                {
-                    currentState = GameState.Playing;
-                }
-
-                if (Keyboard.GetState().IsKeyDown(Keys.D1))
-                {
-                    complete_ctrl_msg = base_control_msg + "Currently Selected: Mouse";
-                    currentControls = ControlScheme.Mouse;
-                }
-
-                if (Keyboard.GetState().IsKeyDown(Keys.D2))
-                {
-                    complete_ctrl_msg = base_control_msg + "Currently Selected: Keyboard";
-                    currentControls = ControlScheme.Keyboard;
-                }
+                currentState = titleScreen.Update();
 
             }
 
@@ -391,20 +351,7 @@ namespace SelinaNo
             if (currentState == GameState.MainMenu)
             {
                 GraphicsDevice.Clear(Color.Black);
-                spriteBatch.Draw(leftPoseSprite, leftPoseRect, Color.White);
-                spriteBatch.Draw(rightPoseSprite, rightPoseRect, Color.White);
-                spriteBatch.Draw(titleSprite, titleRect, Color.White);
-                
-                string message = "Press Tab to Play!";
-                size = scoreboardFont.MeasureString(message);
-                spriteBatch.DrawString(scoreboardFont, message,
-                    new Vector2(GameConstants.SCREEN_WIDTH / 2 - size.X / 2, 3 * GameConstants.SCREEN_HEIGHT / 5), Color.White);
-                if (complete_ctrl_msg != null)
-                {
-                    Vector2 stringSize = scoreboardFont.MeasureString(complete_ctrl_msg);
-                    Vector2 controlLocation = new Vector2(GameConstants.CONTROL_X - stringSize.X / 2, GameConstants.CONTROL_Y);
-                    spriteBatch.DrawString(scoreboardFont, complete_ctrl_msg, controlLocation, Color.DodgerBlue);
-                }
+                titleScreen.Draw(spriteBatch, scoreboardFont);
             }
 
             if (currentState == GameState.LostNoHigh)

@@ -28,5 +28,8 @@ namespace SelinaNo
         public const int CONTROL_Y = SCREEN_HEIGHT - 100;
 
         public const int MAX_SELINA_SPEED = 15;
+
+        //Declaring the ONE random that will be used the entire game.
+        public static Random rand = new Random();
     }
 }

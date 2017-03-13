@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SelinaNo.Scenes;
+using SelinaNo.Entities;
 
 namespace SelinaNo
 {
@@ -69,10 +70,10 @@ namespace SelinaNo
                     counter = 0;
                     goalTime = rand.Next(2000, 5000);
                     Vector2 target = new Vector2(GameScene.SelinaHitBox.Center.X, GameScene.SelinaHitBox.Center.Y);
-                    Projectile projectile = new Projectile(GameScene.laserSprite, drawRectangle.Center.X,
+                    Projectile projectile = new Projectile(BeckyManager.laserSprite, drawRectangle.Center.X,
                                                             drawRectangle.Center.Y,
                                                             target);
-                    GameScene.addProjectile(projectile);
+                    BeckyManager.addProjectile(projectile);
                 }
                 counter += gameTime.ElapsedGameTime.Milliseconds;
 

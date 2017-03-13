@@ -9,34 +9,25 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
+using SelinaNo.Entities;
 
 namespace SelinaNo.Scenes
 {
     class GameScene
     {
+        //Declare a Becky Manager
+        BeckyManager beckyManager;
+
         //  Declaring Selina texture and rectangle
         Texture2D selinaSprite;
         static Rectangle selinaRect;
 
-        // Declaring Bex's texture
-        Texture2D bexSprite;
 
-        //Declaring Laser Sprite
-        public static Texture2D laserSprite;
-
-        //Declaring the List of Bex
-        List<Becky> bexList = new List<Becky>();
-        static List<Projectile> projectileList = new List<Projectile>();
-
-        //Declaring the ONE random that will be used the entire game.
-        Random rand = new Random();
 
         //Declaring the sound effects
-        SoundEffect merhSound;
+
         SoundEffect yumSound;
         SoundEffect hitSound;
-
-        //Declaring Scoreboard Font
 
         Vector2 scoreboardLoc = new Vector2(GameConstants.SCOREBOARD_X, GameConstants.SCOREBOARD_Y);
         Vector2 healthLoc = new Vector2(GameConstants.HEALTH_X, GameConstants.HEALTH_Y);
@@ -75,22 +66,23 @@ namespace SelinaNo.Scenes
 
 
         //CONSTRUCTOR
-        public GameScene() { }
+        public GameScene() {
+            beckyManager = new BeckyManager();
+
+        }
 
         public void LoadContent(ContentManager Content)
         {
+
+            beckyManager.LoadContent(Content);
+
             //Loading the Selina Sprite
             selinaSprite = Content.Load<Texture2D>(@"Sprites\Selina");
 
-            //Loading Laser Sprite
-            laserSprite = Content.Load<Texture2D>(@"Sprites\laser");
-
-
-
             //Loading the sound effects
-            merhSound = Content.Load<SoundEffect>(@"Sounds\Merh");
-            yumSound = Content.Load<SoundEffect>(@"Sounds\Yum");
             hitSound = Content.Load<SoundEffect>(@"Sounds\Explosion");
+            yumSound = Content.Load<SoundEffect>(@"Sounds\Yum");
+            
             SoundEffect.MasterVolume = 0.5f;
 
             //Positioning stuff. This will be useful a lot.
@@ -103,8 +95,7 @@ namespace SelinaNo.Scenes
                                        selinaSprite.Width / GameConstants.RESIZE_FACTOR,
                                        selinaSprite.Height / GameConstants.RESIZE_FACTOR);
 
-            //Loading the Bex Sprite
-            bexSprite = Content.Load<Texture2D>(@"Sprites\Bex");
+
 
         }
 
@@ -163,8 +154,11 @@ namespace SelinaNo.Scenes
 
                 #endregion
 
+                beckyManager.Update(gameTime);
+
+
                 //Handling Collisions
-                foreach (Becky bex in bexList)
+                foreach (Becky bex in beckyManager.getBexList() )
                 {
                     if (selinaRect.Contains(bex.CollisionRectangle))
                     {
@@ -178,46 +172,15 @@ namespace SelinaNo.Scenes
 
             }
 
-            #region Code Related to Becky
-
-            //Adding new Becky
-            if (bexList.Count < 10)
-            {
-                spawnBex();
-            }
-
-            //Removing Dead Beckys
-            for (int i = bexList.Count - 1; i >= 0; i--)
-            {
-                if (!bexList[i].Active)
-                {
-                    bexList.RemoveAt(i);
-                }
-            }
-
-            foreach (Becky bex in bexList)
-            {
-                bex.Update(gameTime);
-            }
-
-            #endregion
-
-            foreach (Projectile projectile in projectileList)
+            foreach (Projectile projectile in beckyManager.getProjectiles())
             {
                 projectile.Update(gameTime);
             }
 
-            //Removing Dead Projectiles
-            for (int k = projectileList.Count - 1; k >= 0; k--)
-            {
-                if (!projectileList[k].Active)
-                {
-                    projectileList.RemoveAt(k);
-                }
-            }
+
 
             //Handling Collisions
-            foreach (Projectile projectile in projectileList)
+            foreach (Projectile projectile in beckyManager.getProjectiles() )
             {
                 if (selinaRect.Contains(projectile.CollisionRectangle))
                 {
@@ -229,19 +192,6 @@ namespace SelinaNo.Scenes
                 }
 
             }
-        }
-
-        private void spawnBex()
-        {
-            int BexX = rand.Next(0, GameConstants.SCREEN_WIDTH - bexSprite.Width);
-            int BexY = rand.Next(0, GameConstants.SCREEN_HEIGHT - bexSprite.Height);
-            Becky Bex = new Becky(bexSprite, BexX, BexY, rand, merhSound);
-            bexList.Add(Bex);
-        }
-
-        public static void addProjectile(Projectile projectile)
-        {
-            projectileList.Add(projectile);
         }
 
         public void checkDeath()
@@ -257,18 +207,7 @@ namespace SelinaNo.Scenes
         public void Draw(SpriteBatch spriteBatch, SpriteFont scoreboardFont)
         {
 
-            //Drawing the Becky's
-            foreach (Becky bex in bexList)
-            {
-                bex.Draw(spriteBatch);
-            }
-
-            //Drawing the Projectiles
-            foreach (Projectile projectile in projectileList)
-            {
-                projectile.Draw(spriteBatch);
-
-            }
+            beckyManager.Draw(spriteBatch);
 
             //Drawing Selina
             spriteBatch.Draw(selinaSprite, selinaRect, Color.White);

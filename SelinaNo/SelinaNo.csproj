@@ -66,14 +66,15 @@
     <SignManifests>true</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Becky.cs" />
+    <Compile Include="Entities\Becky.cs" />
     <Compile Include="ControlScheme.cs" />
+    <Compile Include="Entities\BeckyManager.cs" />
     <Compile Include="Scenes\GameScene.cs" />
     <Compile Include="SelinaNoGame.cs" />
     <Compile Include="GameConstants.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Projectile.cs" />
+    <Compile Include="Entities\Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\TitleScene.cs" />
   </ItemGroup>

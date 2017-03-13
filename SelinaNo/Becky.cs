@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SelinaNo.Scenes;
 
 namespace SelinaNo
 {
@@ -15,6 +16,7 @@ namespace SelinaNo
 
         Texture2D sprite;
         Rectangle drawRectangle;
+        Rectangle target;
         Random rand;
         bool alive = true;
         int counter = 0;
@@ -66,11 +68,11 @@ namespace SelinaNo
                     soundeffect.Play();
                     counter = 0;
                     goalTime = rand.Next(2000, 5000);
-                    Vector2 target = new Vector2(SelinaNoGame.SelinaHitBox.Center.X, SelinaNoGame.SelinaHitBox.Center.Y);
-                    Projectile projectile = new Projectile(SelinaNoGame.laserSprite, drawRectangle.Center.X,
+                    Vector2 target = new Vector2(GameScene.SelinaHitBox.Center.X, GameScene.SelinaHitBox.Center.Y);
+                    Projectile projectile = new Projectile(GameScene.laserSprite, drawRectangle.Center.X,
                                                             drawRectangle.Center.Y,
                                                             target);
-                    SelinaNoGame.addProjectile(projectile);
+                    GameScene.addProjectile(projectile);
                 }
                 counter += gameTime.ElapsedGameTime.Milliseconds;
 

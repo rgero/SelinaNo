@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace SelinaNo
 {
-    class TitleScreen
+    class TitleScene
     {
         //Title Sprite
         Texture2D titleSprite;
@@ -27,7 +27,7 @@ namespace SelinaNo
         static string base_control_msg = "Press 1 for mouse, 2 for keyboard:\n";
         static string complete_ctrl_msg = base_control_msg + "Currently Selected: Mouse";
 
-        public TitleScreen()
+        public TitleScene()
         {
 
         }
@@ -56,11 +56,11 @@ namespace SelinaNo
                                     );
         }
 
-        public SelinaNo.GameState Update()
+        public void Update()
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Tab))
             {
-                return GameState.Playing;
+                SelinaNoGame.currentState = GameState.Playing;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
@@ -74,7 +74,6 @@ namespace SelinaNo
                 complete_ctrl_msg = base_control_msg + "Currently Selected: Keyboard";
                 SelinaNoGame.currentControls = ControlScheme.Keyboard;
             }
-            return GameState.MainMenu;
         }
 
         public void Draw(SpriteBatch spriteBatch, SpriteFont scoreboardFont)

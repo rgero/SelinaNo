@@ -15,6 +15,8 @@ namespace SelinaNo.Scenes
 {
     class GameScene
     {
+        SelinaNoGame parent;
+
         //Declare a Becky Manager
         BeckyManager beckyManager;
 
@@ -66,8 +68,9 @@ namespace SelinaNo.Scenes
 
 
         //CONSTRUCTOR
-        public GameScene() {
-            beckyManager = new BeckyManager();
+        public GameScene(SelinaNoGame game) {
+            parent = game;
+            beckyManager = new BeckyManager(parent);
 
         }
 
@@ -108,13 +111,13 @@ namespace SelinaNo.Scenes
 
 
                 // Selina Update Position based on mouse location
-                if (SelinaNoGame.currentControls == ControlScheme.Mouse)
+                if (parent.getControls() == ControlScheme.Mouse)
                 {
                     MouseState mouse = Mouse.GetState();
                     selinaRect.X = mouse.X - (selinaSprite.Width / (2 * GameConstants.RESIZE_FACTOR));
                     selinaRect.Y = mouse.Y - (selinaSprite.Height / (2 * GameConstants.RESIZE_FACTOR));
                 }
-                else if (SelinaNoGame.currentControls == ControlScheme.Keyboard)
+                else if (parent.getControls() == ControlScheme.Keyboard)
                 {
                     if (Keyboard.GetState().IsKeyDown(Keys.W))
                     {
@@ -199,7 +202,7 @@ namespace SelinaNo.Scenes
             if (Health <= 0)
             {
                 SelinaNoGame.setScore(score);
-                SelinaNoGame.currentState = GameState.LostNoHigh;
+                parent.setState(GameState.LostNoHigh);
             }
 
         }

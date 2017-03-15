@@ -18,16 +18,15 @@ namespace SelinaNo
         SpriteBatch spriteBatch;
         SpriteFont scoreboardFont;
 
-        //Menu
+        //Declaring Scenes
         TitleScene titleScene;
-
-        //Game Scene
         GameScene gameScene;
 
-        public static ControlScheme currentControls = ControlScheme.Mouse;
+        //Declaring the ONE random that will be used the entire game.
+        Random rand;
 
-        //Declaring the initial GameState
-        public static GameState currentState = GameState.MainMenu;
+        GameState currentState;
+        ControlScheme currentControls;
 
         public static int gameScore;
 
@@ -39,8 +38,13 @@ namespace SelinaNo
             graphics.PreferredBackBufferHeight = GameConstants.SCREEN_HEIGHT;
             graphics.PreferredBackBufferWidth = GameConstants.SCREEN_WIDTH;
 
-            titleScene = new TitleScene();
-            gameScene = new GameScene();
+            titleScene = new TitleScene(this);
+            gameScene = new GameScene(this);
+
+            rand = new Random();
+
+            currentControls = ControlScheme.Mouse;
+            currentState = GameState.MainMenu;
 
         }
 
@@ -152,6 +156,26 @@ namespace SelinaNo
         public static void setScore(int score)
         {
             gameScore = score;
+        }
+
+        public Random getRandom()
+        {
+            return rand;
+        }
+
+        public void setControls(ControlScheme e)
+        {
+            currentControls = e;
+        }
+
+        public ControlScheme getControls()
+        {
+            return currentControls;
+        }
+
+        public void setState(GameState state)
+        {
+            currentState = state;
         }
 
     }

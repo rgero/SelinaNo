@@ -14,6 +14,8 @@ namespace SelinaNo
 {
     class TitleScene
     {
+        SelinaNoGame parent;
+
         //Title Sprite
         Texture2D titleSprite;
         Rectangle titleRect;
@@ -27,9 +29,9 @@ namespace SelinaNo
         static string base_control_msg = "Press 1 for mouse, 2 for keyboard:\n";
         static string complete_ctrl_msg = base_control_msg + "Currently Selected: Mouse";
 
-        public TitleScene()
+        public TitleScene(SelinaNoGame g)
         {
-
+            parent = g;
         }
 
         public void LoadContent(ContentManager Content)
@@ -60,19 +62,19 @@ namespace SelinaNo
         {
             if (Keyboard.GetState().IsKeyDown(Keys.Tab))
             {
-                SelinaNoGame.currentState = GameState.Playing;
+                parent.setState(GameState.Playing);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
             {
                 complete_ctrl_msg = base_control_msg + "Currently Selected: Mouse";
-                SelinaNoGame.currentControls = ControlScheme.Mouse;
+                parent.setControls(ControlScheme.Mouse);
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D2))
             {
                 complete_ctrl_msg = base_control_msg + "Currently Selected: Keyboard";
-                SelinaNoGame.currentControls = ControlScheme.Keyboard;
+                parent.setControls(ControlScheme.Keyboard);
             }
         }
 

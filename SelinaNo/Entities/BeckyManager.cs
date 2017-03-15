@@ -14,6 +14,7 @@ namespace SelinaNo.Entities
 {
     class BeckyManager
     {
+        SelinaNoGame parent;
 
         // Declaring Bex's texture
         Texture2D bexSprite;
@@ -28,8 +29,9 @@ namespace SelinaNo.Entities
         static List<Projectile> projectileList = new List<Projectile>();
 
 
-        public BeckyManager()
+        public BeckyManager(SelinaNoGame game)
         {
+            parent = game;
             bexList = new List<Becky>();
         }
 
@@ -119,9 +121,9 @@ namespace SelinaNo.Entities
 
         private void spawnBex()
         {
-            int BexX = GameConstants.rand.Next(0, GameConstants.SCREEN_WIDTH - bexSprite.Width);
-            int BexY = GameConstants.rand.Next(0, GameConstants.SCREEN_HEIGHT - bexSprite.Height);
-            Becky Bex = new Becky(bexSprite, BexX, BexY, GameConstants.rand, merhSound);
+            int BexX = parent.getRandom().Next(0, GameConstants.SCREEN_WIDTH - bexSprite.Width);
+            int BexY = parent.getRandom().Next(0, GameConstants.SCREEN_HEIGHT - bexSprite.Height);
+            Becky Bex = new Becky(bexSprite, BexX, BexY, parent.getRandom(), merhSound);
             bexList.Add(Bex);
         }
 

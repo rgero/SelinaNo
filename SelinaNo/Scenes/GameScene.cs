@@ -17,17 +17,18 @@ namespace SelinaNo.Scenes
     {
         SelinaNoGame parent;
 
-        //Declare a Becky Manager
+        //Declare the managers
         BeckyManager beckyManager;
+        ProjectileManager projectileManager;
 
         //  Declaring Selina texture and rectangle
         Texture2D selinaSprite;
         static Rectangle selinaRect;
 
-
+        //Declaring the ONE random that will be used the entire game.
+        Random rand;
 
         //Declaring the sound effects
-
         SoundEffect yumSound;
         SoundEffect hitSound;
 
@@ -67,11 +68,11 @@ namespace SelinaNo.Scenes
         }
 
 
-        //CONSTRUCTOR
         public GameScene(SelinaNoGame game) {
             parent = game;
-            beckyManager = new BeckyManager(parent);
-
+            beckyManager = new BeckyManager(this);
+            projectileManager = new ProjectileManager(this);
+            rand = new Random();
         }
 
         public void LoadContent(ContentManager Content)
@@ -175,15 +176,13 @@ namespace SelinaNo.Scenes
 
             }
 
-            foreach (Projectile projectile in beckyManager.getProjectiles())
+            foreach (Projectile projectile in projectileManager.getProjectiles())
             {
                 projectile.Update(gameTime);
             }
 
-
-
             //Handling Collisions
-            foreach (Projectile projectile in beckyManager.getProjectiles() )
+            foreach (Projectile projectile in projectileManager.getProjectiles() )
             {
                 if (selinaRect.Contains(projectile.CollisionRectangle))
                 {
@@ -211,6 +210,7 @@ namespace SelinaNo.Scenes
         {
 
             beckyManager.Draw(spriteBatch);
+            projectileManager.Draw(spriteBatch);
 
             //Drawing Selina
             spriteBatch.Draw(selinaSprite, selinaRect, Color.White);
@@ -218,6 +218,21 @@ namespace SelinaNo.Scenes
             //Drawing the ScoreBoard and Health
             spriteBatch.DrawString(scoreboardFont, scoreMessage, scoreboardLoc, Color.White);
             spriteBatch.DrawString(scoreboardFont, healthMessage, healthLoc, Color.White);
+        }
+
+        public BeckyManager getBeckyManager()
+        {
+            return beckyManager;
+        }
+
+        public ProjectileManager getProjectileManager()
+        {
+            return projectileManager;
+        }
+
+        public Random getRandom()
+        {
+            return rand;
         }
 
 

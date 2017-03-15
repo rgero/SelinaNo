@@ -53,7 +53,6 @@ namespace SelinaNo
                 drawRectangle.X += (int)(normalizedVector.X * gameTime.ElapsedGameTime.Milliseconds);
                 drawRectangle.Y += (int)(normalizedVector.Y * gameTime.ElapsedGameTime.Milliseconds);
             }
-
         }
 
         public void Draw(SpriteBatch spriteBatch)

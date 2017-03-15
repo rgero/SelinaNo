@@ -8,13 +8,14 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using SelinaNo.Scenes;
 
 
 namespace SelinaNo.Entities
 {
     class BeckyManager
     {
-        SelinaNoGame parent;
+        GameScene parent;
 
         // Declaring Bex's texture
         Texture2D bexSprite;
@@ -26,10 +27,8 @@ namespace SelinaNo.Entities
 
         //Declaring the List of Bex
         List<Becky> bexList = new List<Becky>();
-        static List<Projectile> projectileList = new List<Projectile>();
 
-
-        public BeckyManager(SelinaNoGame game)
+        public BeckyManager(GameScene game)
         {
             parent = game;
             bexList = new List<Becky>();
@@ -69,21 +68,6 @@ namespace SelinaNo.Entities
             {
                 bex.Update(gameTime);
             }
-
-            foreach (Projectile projectile in projectileList)
-            {
-                projectile.Update(gameTime);
-            }
-
-            //Removing Dead Projectiles
-            for (int k = projectileList.Count - 1; k >= 0; k--)
-            {
-                if (!projectileList[k].Active)
-                {
-                    projectileList.RemoveAt(k);
-                }
-            }
-
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -93,37 +77,22 @@ namespace SelinaNo.Entities
             {
                 bex.Draw(spriteBatch);
             }
-
-            //Drawing the Projectiles
-            foreach (Projectile projectile in projectileList)
-            {
-                projectile.Draw(spriteBatch);
-
-            }
         }
 
         //Helper Functions
-
-        public static void addProjectile(Projectile projectile)
-        {
-            projectileList.Add(projectile);
-        }
 
         public List<Becky> getBexList()
         {
             return bexList;
         }
 
-        public List<Projectile> getProjectiles()
-        {
-            return projectileList;
-        }
+
 
         private void spawnBex()
         {
             int BexX = parent.getRandom().Next(0, GameConstants.SCREEN_WIDTH - bexSprite.Width);
             int BexY = parent.getRandom().Next(0, GameConstants.SCREEN_HEIGHT - bexSprite.Height);
-            Becky Bex = new Becky(bexSprite, BexX, BexY, parent.getRandom(), merhSound);
+            Becky Bex = new Becky(parent, bexSprite, BexX, BexY, parent.getRandom(), merhSound);
             bexList.Add(Bex);
         }
 

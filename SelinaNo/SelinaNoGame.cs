@@ -22,9 +22,6 @@ namespace SelinaNo
         TitleScene titleScene;
         GameScene gameScene;
 
-        //Declaring the ONE random that will be used the entire game.
-        Random rand;
-
         GameState currentState;
         ControlScheme currentControls;
 
@@ -40,8 +37,6 @@ namespace SelinaNo
 
             titleScene = new TitleScene(this);
             gameScene = new GameScene(this);
-
-            rand = new Random();
 
             currentControls = ControlScheme.Mouse;
             currentState = GameState.MainMenu;
@@ -158,10 +153,7 @@ namespace SelinaNo
             gameScore = score;
         }
 
-        public Random getRandom()
-        {
-            return rand;
-        }
+
 
         public void setControls(ControlScheme e)
         {

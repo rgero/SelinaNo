@@ -14,10 +14,10 @@ namespace SelinaNo
 {
     class Becky
     {
+        GameScene gameScene;
 
         Texture2D sprite;
         Rectangle drawRectangle;
-        Rectangle target;
         Random rand;
         bool alive = true;
         int counter = 0;
@@ -48,8 +48,9 @@ namespace SelinaNo
             set { velocityX = value.X; velocityY = value.Y; }
         }
 
-        public Becky(Texture2D sprite, int x, int y, Random rand, SoundEffect sound)
+        public Becky(GameScene game, Texture2D sprite, int x, int y, Random rand, SoundEffect sound)
         {
+            this.gameScene = game;
             this.soundeffect = sound;
             this.sprite = sprite;
             drawRectangle = new Rectangle(x, y, sprite.Width, sprite.Height);
@@ -73,7 +74,7 @@ namespace SelinaNo
                     Projectile projectile = new Projectile(BeckyManager.laserSprite, drawRectangle.Center.X,
                                                             drawRectangle.Center.Y,
                                                             target);
-                    BeckyManager.addProjectile(projectile);
+                    gameScene.getProjectileManager().addProjectile(projectile);
                 }
                 counter += gameTime.ElapsedGameTime.Milliseconds;
 

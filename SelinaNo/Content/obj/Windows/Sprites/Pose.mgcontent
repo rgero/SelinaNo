@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <SourceFile>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/Sprites/Pose.png</SourceFile>
-  <SourceTime>2017-03-11T10:38:36.0894618-05:00</SourceTime>
-  <DestFile>C:/Users/Roymond/Personal_Projects/C#/SelinaNo/SelinaNo/Content/bin/Windows/Sprites/Pose.xnb</DestFile>
-  <DestTime>2017-03-12T00:50:12.1572244-05:00</DestTime>
+  <SourceFile>C:/Users/gero/Personal_Projects/C#/Selina_No/SelinaNo/Content/Sprites/Pose.png</SourceFile>
+  <SourceTime>2017-03-10T23:45:36.7816688-05:00</SourceTime>
+  <DestFile>C:/Users/gero/Personal_Projects/C#/Selina_No/SelinaNo/Content/bin/Windows/Sprites/Pose.xnb</DestFile>
+  <DestTime>2017-03-16T14:20:16.5656135-04:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-03-30T02:36:08-04:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

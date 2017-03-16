@@ -68,7 +68,7 @@ namespace SelinaNo
             //Loading Font
             scoreboardFont = Content.Load<SpriteFont>(@"Fonts\scoreboardFont");
 
-
+            SoundEffect.MasterVolume = 0.1f;
 
             titleScene.LoadContent(this.Content);
             gameScene.LoadContent(this.Content);

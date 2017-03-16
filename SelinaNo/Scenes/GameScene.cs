@@ -87,8 +87,6 @@ namespace SelinaNo.Scenes
             hitSound = Content.Load<SoundEffect>(@"Sounds\Explosion");
             yumSound = Content.Load<SoundEffect>(@"Sounds\Yum");
             
-            SoundEffect.MasterVolume = 0.5f;
-
             //Positioning stuff. This will be useful a lot.
             int halfSelinaX = selinaSprite.Width / 2;
             int halfSelinaY = selinaSprite.Height / 2;
@@ -176,10 +174,7 @@ namespace SelinaNo.Scenes
 
             }
 
-            foreach (Projectile projectile in projectileManager.getProjectiles())
-            {
-                projectile.Update(gameTime);
-            }
+            projectileManager.Update(gameTime);
 
             //Handling Collisions
             foreach (Projectile projectile in projectileManager.getProjectiles() )

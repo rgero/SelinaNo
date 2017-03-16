@@ -70,6 +70,7 @@
     <Compile Include="ControlScheme.cs" />
     <Compile Include="Entities\BeckyManager.cs" />
     <Compile Include="Entities\ProjectileManager.cs" />
+    <Compile Include="Scenes\EndScene.cs" />
     <Compile Include="Scenes\GameScene.cs" />
     <Compile Include="SelinaNoGame.cs" />
     <Compile Include="GameConstants.cs" />

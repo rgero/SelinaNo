@@ -63,5 +63,10 @@ namespace SelinaNo.Entities
         {
             return projectileList;
         }
+
+        public void clearList()
+        {
+            projectileList.Clear();
+        }
     }
 }

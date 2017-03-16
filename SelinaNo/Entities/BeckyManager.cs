@@ -96,5 +96,10 @@ namespace SelinaNo.Entities
             bexList.Add(Bex);
         }
 
+        public void clearList()
+        {
+            bexList.Clear();
+        }
+
     }
 }

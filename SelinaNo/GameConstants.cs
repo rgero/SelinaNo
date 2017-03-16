@@ -19,6 +19,8 @@ namespace SelinaNo
         public const int SCOREBOARD_Y = 20;
         public const string SCORE_PREFIX = "Score: ";
 
+        public const int LINE_OFFSET = 30;
+
         public const int HEALTH_X = SCREEN_WIDTH - 250;
         public const int HEALTH_Y = 20;
         public const string HEALTH_PREFIX = "Health: ";

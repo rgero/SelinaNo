@@ -37,30 +37,13 @@ namespace SelinaNo.Scenes
         Vector2 controlDisplay = new Vector2(GameConstants.CONTROL_X, GameConstants.CONTROL_Y);
 
         //Declaring Scoreboard
-        static int score = 0;
-        string scoreMessage = GameConstants.SCORE_PREFIX + score.ToString();
+        int score;
+        string scoreMessage;
 
         //Declaring the Health
-        static int health = GameConstants.INITIAL_HEALTH;
-        string healthMessage = GameConstants.HEALTH_PREFIX + health.ToString();
+        int health;
+        string healthMessage;
         bool selinaAlive = true;
-
-        public static int Health
-        {
-            get { return health; }
-            set
-            {
-                health = value;
-                if (health < 0)
-                {
-                    health = 0;
-                }
-                if (health > GameConstants.INITIAL_HEALTH)
-                {
-                    health = GameConstants.INITIAL_HEALTH;
-                }
-            }
-        }
 
         public static Rectangle SelinaHitBox
         {
@@ -70,6 +53,10 @@ namespace SelinaNo.Scenes
 
         public GameScene(SelinaNoGame game) {
             parent = game;
+            health = GameConstants.INITIAL_HEALTH;
+            healthMessage = GameConstants.HEALTH_PREFIX + health.ToString();
+            score = 0;
+            scoreMessage = GameConstants.SCORE_PREFIX + score.ToString();
             beckyManager = new BeckyManager(this);
             projectileManager = new ProjectileManager(this);
             rand = new Random();
@@ -183,8 +170,8 @@ namespace SelinaNo.Scenes
                 {
                     hitSound.Play();
                     projectile.Active = false;
-                    Health -= 5;
-                    healthMessage = GameConstants.HEALTH_PREFIX + Health.ToString();
+                    health -= 5;
+                    healthMessage = GameConstants.HEALTH_PREFIX + health.ToString();
                     checkDeath();
                 }
 
@@ -193,9 +180,9 @@ namespace SelinaNo.Scenes
 
         public void checkDeath()
         {
-            if (Health <= 0)
+            if (health <= 0)
             {
-                SelinaNoGame.setScore(score);
+                parent.setScore(score);
                 parent.setState(GameState.LostNoHigh);
             }
 
@@ -230,6 +217,15 @@ namespace SelinaNo.Scenes
             return rand;
         }
 
+        public void resetGame()
+        {
+            health = GameConstants.INITIAL_HEALTH;
+            healthMessage = GameConstants.HEALTH_PREFIX + health.ToString();
+            score = 0;
+            scoreMessage = GameConstants.SCORE_PREFIX + score.ToString();
+            beckyManager.clearList();
+            projectileManager.clearList();
+        }
 
 
     }

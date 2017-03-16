@@ -21,6 +21,7 @@ namespace SelinaNo
         //Declaring Scenes
         TitleScene titleScene;
         GameScene gameScene;
+        EndScene endScene;
 
         GameState currentState;
         ControlScheme currentControls;
@@ -37,6 +38,8 @@ namespace SelinaNo
 
             titleScene = new TitleScene(this);
             gameScene = new GameScene(this);
+            endScene = new EndScene(this);
+            
 
             currentControls = ControlScheme.Mouse;
             currentState = GameState.MainMenu;
@@ -72,6 +75,7 @@ namespace SelinaNo
 
             titleScene.LoadContent(this.Content);
             gameScene.LoadContent(this.Content);
+            endScene.LoadContent(this.Content);
 
 
 
@@ -106,6 +110,11 @@ namespace SelinaNo
             {
                 gameScene.Update(gameTime);
             }
+
+            if (currentState == GameState.LostNoHigh)
+            {
+                endScene.Update();
+            }
             base.Update(gameTime);
         }
 
@@ -133,12 +142,7 @@ namespace SelinaNo
             if (currentState == GameState.LostNoHigh)
             {
                 GraphicsDevice.Clear(Color.Black);
-                string message = "You Lost!\nYour score was " + gameScore.ToString() + "\nPress Escape to Quit";
-                Vector2 size = scoreboardFont.MeasureString(message);
-
-                spriteBatch.DrawString(scoreboardFont, message,
-                    new Vector2(GameConstants.SCREEN_WIDTH / 2 - size.X / 2, GameConstants.SCREEN_HEIGHT / 2 - size.Y / 2),
-                    Color.White);
+                endScene.Draw(spriteBatch, scoreboardFont);
 
             }
 
@@ -148,9 +152,14 @@ namespace SelinaNo
             base.Draw(gameTime);
         }
 
-        public static void setScore(int score)
+        public void setScore(int score)
         {
             gameScore = score;
+        }
+
+        public int getScore()
+        {
+            return gameScore;
         }
 
 
@@ -168,6 +177,11 @@ namespace SelinaNo
         public void setState(GameState state)
         {
             currentState = state;
+        }
+
+        public void resetGame()
+        {
+            gameScene.resetGame();
         }
 
     }

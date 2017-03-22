@@ -79,6 +79,8 @@
     <Compile Include="Entities\Projectile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scenes\TitleScene.cs" />
+    <Compile Include="Utilities\Button.cs" />
+    <Compile Include="Utilities\ButtonManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

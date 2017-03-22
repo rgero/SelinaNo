@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
+using SelinaNo.Utilities;
 
 namespace SelinaNo
 {
@@ -13,11 +15,18 @@ namespace SelinaNo
         Texture2D titleSprite;
         Rectangle titleRect;
 
+        // Mouse Sprite
+        Texture2D mouseSprite;
+        Rectangle mouseRectangle;
+
         //Pose Sprite
         Texture2D leftPoseSprite;
         Rectangle leftPoseRect;
         Texture2D rightPoseSprite;
         Rectangle rightPoseRect;
+
+        ButtonManager buttonManager;
+
 
         static string base_control_msg = "Press 1 for mouse, 2 for keyboard:\n";
         static string complete_ctrl_msg = base_control_msg + "Currently Selected: Mouse";
@@ -25,6 +34,7 @@ namespace SelinaNo
         public TitleScene(SelinaNoGame g)
         {
             parent = g;
+            buttonManager = new ButtonManager();
         }
 
         public void LoadContent(ContentManager Content)
@@ -35,6 +45,10 @@ namespace SelinaNo
                                       100,
                                       titleSprite.Width,
                                       titleSprite.Height);
+
+            //Mouse Sprite
+            mouseSprite = Content.Load<Texture2D>(@"Sprites\laser");
+            mouseRectangle = new Rectangle(mouseSprite.Width / 2, mouseSprite.Height / 2, mouseSprite.Width, mouseSprite.Height);
 
             leftPoseSprite = Content.Load<Texture2D>(@"Sprites\Pose");
             float resizingFactor = ((float)GameConstants.SCREEN_HEIGHT / leftPoseSprite.Height);
@@ -49,10 +63,18 @@ namespace SelinaNo
                                             (int)(resizingFactor * leftPoseSprite.Width),
                                             (int)(resizingFactor * leftPoseSprite.Height)
                                     );
+
+            buttonManager.Load(Content);
+            buttonManager.addButton("Testing", 10, 10);
         }
 
         public void Update()
         {
+            mouseRectangle.X = Mouse.GetState().X - mouseSprite.Width / 2;
+            mouseRectangle.Y = Mouse.GetState().Y - mouseSprite.Height / 2;
+
+            buttonManager.Update();
+
             if (Keyboard.GetState().IsKeyDown(Keys.Tab))
             {
                 parent.setState(GameState.Playing);
@@ -76,7 +98,7 @@ namespace SelinaNo
             spriteBatch.Draw(leftPoseSprite, leftPoseRect, Color.White);
             spriteBatch.Draw(rightPoseSprite, rightPoseRect, Color.White);
             spriteBatch.Draw(titleSprite, titleRect, Color.White);
-
+            spriteBatch.Draw(mouseSprite, mouseRectangle, Color.White);
             string message = "Press Tab to Play!";
             Vector2 size = scoreboardFont.MeasureString(message);
             spriteBatch.DrawString(scoreboardFont, message,
@@ -87,8 +109,8 @@ namespace SelinaNo
                 Vector2 controlLocation = new Vector2(GameConstants.CONTROL_X - stringSize.X / 2, GameConstants.CONTROL_Y);
                 spriteBatch.DrawString(scoreboardFont, complete_ctrl_msg, controlLocation, Color.DodgerBlue);
             }
+
+            buttonManager.Draw(spriteBatch);
         }
-
-
     }
 }

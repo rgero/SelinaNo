@@ -76,3 +76,4 @@ C:\Users\gero\Personal_Projects\C#\Selina_No\SelinaNo\bin\Windows\x86\Debug\Cont
 C:\Users\gero\Personal_Projects\C#\Selina_No\SelinaNo\bin\Windows\x86\Debug\Content\Sprites\PoseRight.xnb
 C:\Users\Roymond\Personal_Projects\C#\SelinaNo\SelinaNo\bin\Windows\x86\Debug\Content\Sprites\Pose.xnb
 C:\Users\Roymond\Personal_Projects\C#\SelinaNo\SelinaNo\bin\Windows\x86\Debug\Content\Sprites\PoseRight.xnb
+C:\Users\gero\Personal_Projects\C#\Selina_No\SelinaNo\bin\Windows\x86\Debug\Content\Sprites\defaultButtonSprite.xnb

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Content;
 using SelinaNo.Scenes;
 
 namespace SelinaNo.Entities
@@ -9,12 +10,19 @@ namespace SelinaNo.Entities
     {
         GameScene parent;
         List<Projectile> projectileList;
+        Texture2D laserSprite;
 
         public ProjectileManager(GameScene game)
         {
             parent = game;
             projectileList = new List<Projectile>();
 
+        }
+
+        public void LoadContent(ContentManager Content)
+        {
+            //Loading Laser Sprite
+            laserSprite = Content.Load<Texture2D>(@"Sprites\laser");
         }
 
         public void Update(GameTime gameTime)
@@ -60,6 +68,11 @@ namespace SelinaNo.Entities
         public void clearList()
         {
             projectileList.Clear();
+        }
+
+        public Texture2D getProjectileSprite()
+        {
+            return laserSprite;
         }
     }
 }

@@ -67,7 +67,7 @@ namespace SelinaNo
                     counter = 0;
                     goalTime = rand.Next(2000, 5000);
                     Vector2 target = new Vector2(GameScene.SelinaHitBox.Center.X, GameScene.SelinaHitBox.Center.Y);
-                    Projectile projectile = new Projectile(BeckyManager.laserSprite, drawRectangle.Center.X,
+                    Projectile projectile = new Projectile(gameScene.getProjectileManager().getProjectileSprite(), drawRectangle.Center.X,
                                                             drawRectangle.Center.Y,
                                                             target);
                     gameScene.getProjectileManager().addProjectile(projectile);

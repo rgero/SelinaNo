@@ -59,8 +59,8 @@ namespace SelinaNo.Scenes
 
         public void LoadContent(ContentManager Content)
         {
-
             beckyManager.LoadContent(Content);
+            projectileManager.LoadContent(Content);
 
             //Loading the Selina Sprite
             selinaSprite = Content.Load<Texture2D>(@"Sprites\Selina");
@@ -78,19 +78,13 @@ namespace SelinaNo.Scenes
                                        GameConstants.SCREEN_HEIGHT / 2 - halfSelinaY / GameConstants.RESIZE_FACTOR,
                                        selinaSprite.Width / GameConstants.RESIZE_FACTOR,
                                        selinaSprite.Height / GameConstants.RESIZE_FACTOR);
-
-
-
         }
 
         public void Update(GameTime gameTime)
         {
             if (selinaAlive)
             {
-
                 #region Selina Movement
-
-
                 // Selina Update Position based on mouse location
                 if (parent.getControls() == ControlScheme.Mouse)
                 {
@@ -139,7 +133,7 @@ namespace SelinaNo.Scenes
                 #endregion
 
                 beckyManager.Update(gameTime);
-
+                projectileManager.Update(gameTime);
 
                 //Handling Collisions
                 foreach (Becky bex in beckyManager.getBexList() )
@@ -154,23 +148,21 @@ namespace SelinaNo.Scenes
 
                 }
 
-            }
-
-            projectileManager.Update(gameTime);
-
-            //Handling Collisions
-            foreach (Projectile projectile in projectileManager.getProjectiles() )
-            {
-                if (selinaRect.Contains(projectile.CollisionRectangle))
+                //Handling Collisions for Projectiles
+                foreach (Projectile projectile in projectileManager.getProjectiles())
                 {
-                    hitSound.Play();
-                    projectile.Active = false;
-                    health -= 5;
-                    healthMessage = GameConstants.HEALTH_PREFIX + health.ToString();
-                    checkDeath();
-                }
+                    if (selinaRect.Contains(projectile.CollisionRectangle))
+                    {
+                        hitSound.Play();
+                        projectile.Active = false;
+                        health -= 5;
+                        healthMessage = GameConstants.HEALTH_PREFIX + health.ToString();
+                        checkDeath();
+                    }
 
+                }
             }
+
         }
 
         public void checkDeath()

@@ -11,16 +11,8 @@ namespace SelinaNo.Entities
     class BeckyManager
     {
         GameScene parent;
-
-        // Declaring Bex's texture
         Texture2D bexSprite;
-
-        //Declaring Laser Sprite
-        public static Texture2D laserSprite;
-
         SoundEffect merhSound;
-
-        //Declaring the List of Bex
         List<Becky> bexList = new List<Becky>();
 
         public BeckyManager(GameScene game)
@@ -31,9 +23,6 @@ namespace SelinaNo.Entities
 
         public void LoadContent(ContentManager Content)
         {
-            //Loading Laser Sprite
-            laserSprite = Content.Load<Texture2D>(@"Sprites\laser");
-
             merhSound = Content.Load<SoundEffect>(@"Sounds\Merh");
 
             //Loading the Bex Sprite
@@ -43,7 +32,6 @@ namespace SelinaNo.Entities
 
         public void Update(GameTime gameTime)
         {
-
             //Removing Dead Beckys
             for (int i = bexList.Count - 1; i >= 0; i--)
             {

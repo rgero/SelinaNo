@@ -12,17 +12,20 @@ namespace SelinaNo.Utilities
         List<Button> buttonList;
         Texture2D defaultSprite;
         SpriteFont defaultFont;
+        Object parent;
 
-        public ButtonManager(Texture2D sprite, SpriteFont font)
+        public ButtonManager(Texture2D sprite, SpriteFont font, Object parent)
         {
             buttonList = new List<Button>();
             this.defaultSprite = sprite;
             this.defaultFont = font;
+            this.parent = parent;
         }
 
-        public ButtonManager()
+        public ButtonManager(Object parent)
         {
             buttonList = new List<Button>();
+            this.parent = parent;
         }
 
         public void Load(ContentManager Content)
@@ -36,9 +39,9 @@ namespace SelinaNo.Utilities
             buttonList.Add(button);
         }
 
-        public void addButton(string text, int x, int y)
+        public void addButton(string text, int x, int y, Object action)
         {
-            Button button = new Button(defaultSprite, defaultFont, text, new Point(x, y));
+            Button button = new Button(defaultSprite, defaultFont, text, new Point(x, y), action);
             buttonList.Add(button);
         }
 
@@ -46,7 +49,19 @@ namespace SelinaNo.Utilities
         {
             foreach(Button i in buttonList)
             {
-                i.Update();
+                Object returnedValue = i.Update();
+                if (returnedValue != null)
+                {
+                    if (returnedValue.GetType() == typeof(GameState))
+                    {
+                        if (parent.GetType() == typeof(SelinaNoGame))
+                        {
+                            SelinaNoGame p = (SelinaNoGame)parent;
+                            p.setState((GameState)returnedValue);
+                        }
+                    }
+                }
+
             }
         }
 

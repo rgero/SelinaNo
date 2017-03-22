@@ -34,7 +34,7 @@ namespace SelinaNo
         public TitleScene(SelinaNoGame g)
         {
             parent = g;
-            buttonManager = new ButtonManager();
+            buttonManager = new ButtonManager(g);
         }
 
         public void LoadContent(ContentManager Content)
@@ -65,7 +65,7 @@ namespace SelinaNo
                                     );
 
             buttonManager.Load(Content);
-            buttonManager.addButton("Testing", 10, 10);
+            buttonManager.addButton("Testing", 10, 10, GameState.LostNoHigh);
         }
 
         public void Update()
@@ -98,7 +98,8 @@ namespace SelinaNo
             spriteBatch.Draw(leftPoseSprite, leftPoseRect, Color.White);
             spriteBatch.Draw(rightPoseSprite, rightPoseRect, Color.White);
             spriteBatch.Draw(titleSprite, titleRect, Color.White);
-            spriteBatch.Draw(mouseSprite, mouseRectangle, Color.White);
+
+            
             string message = "Press Tab to Play!";
             Vector2 size = scoreboardFont.MeasureString(message);
             spriteBatch.DrawString(scoreboardFont, message,
@@ -111,6 +112,7 @@ namespace SelinaNo
             }
 
             buttonManager.Draw(spriteBatch);
+            spriteBatch.Draw(mouseSprite, mouseRectangle, Color.White);
         }
     }
 }

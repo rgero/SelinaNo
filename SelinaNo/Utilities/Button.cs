@@ -11,27 +11,26 @@ namespace SelinaNo.Utilities
         Texture2D backgroundSprite;
         Rectangle buttonRect;
         SpriteFont font;
+        Vector2 stringSize;
+        Vector2 stringPos;
         string buttonText;
         ButtonState clickStatus;
+        Object onClickAction;
 
-        public Button(Texture2D sprite, SpriteFont font, string text, Point origin)
+        public Button(Texture2D sprite, SpriteFont font, string text, Point origin, Object action)
         {
             this.backgroundSprite = sprite;
             this.font = font;
+            this.stringSize = font.MeasureString(text);
             this.buttonText = text;
-            this.buttonRect = new Rectangle(origin.X, origin.Y, sprite.Width, sprite.Height);
+            this.buttonRect = new Rectangle(origin.X, origin.Y, (int)stringSize.X + 60, (int)stringSize.Y + 60);
+            this.stringPos = new Vector2(origin.X + 30, origin.Y + 30);
+            this.onClickAction = action;
             clickStatus = ButtonState.Released;
         }
 
-        public Button(Texture2D sprite, SpriteFont font, string text, Rectangle rect)
-        {
-            this.backgroundSprite = sprite;
-            this.font = font;
-            this.buttonText = text;
-            this.buttonRect = rect;
-        }
 
-        public void Update()
+        public Object Update()
         {
             if (Mouse.GetState().LeftButton == ButtonState.Pressed
                     && clickStatus == ButtonState.Released
@@ -45,19 +44,18 @@ namespace SelinaNo.Utilities
                 {
                     Console.WriteLine(buttonText + " - Button Clicked");
                     clickStatus = ButtonState.Released;
+                    return onClickAction;
                 }
                 clickStatus = ButtonState.Released;
             }
+            return null;
 
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            Vector2 stringSize = font.MeasureString(buttonText);
-            buttonRect.Width = (int)stringSize.X + 20;
-            buttonRect.Height = (int)stringSize.Y;
             spriteBatch.Draw(backgroundSprite, buttonRect, Color.White);
-            spriteBatch.DrawString(font, buttonText, buttonRect.Location.ToVector2(), Color.Black);
+            spriteBatch.DrawString(font, buttonText, stringPos, Color.Black);
         }
     }
 }

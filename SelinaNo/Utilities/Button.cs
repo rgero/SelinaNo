@@ -13,6 +13,7 @@ namespace SelinaNo.Utilities
         SpriteFont font;
         Vector2 stringSize;
         Vector2 stringPos;
+        Vector2 rectPos;
         string buttonText;
         ButtonState clickStatus;
         Object onClickAction;
@@ -23,8 +24,13 @@ namespace SelinaNo.Utilities
             this.font = font;
             this.stringSize = font.MeasureString(text);
             this.buttonText = text;
-            this.buttonRect = new Rectangle(origin.X, origin.Y, (int)stringSize.X + 60, (int)stringSize.Y + 60);
-            this.stringPos = new Vector2(origin.X + 30, origin.Y + 30);
+
+            // Origin should be the CENTER.
+            int xPos = (int)(origin.X - stringSize.X / 2.0);
+            int yPos = (int)(origin.Y - stringSize.Y / 2.0);
+
+            this.buttonRect = new Rectangle(xPos, yPos, (int)stringSize.X + 60, (int)stringSize.Y + 60);
+            this.stringPos = new Vector2(xPos + 30, yPos + 30);
             this.onClickAction = action;
             clickStatus = ButtonState.Released;
         }

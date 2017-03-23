@@ -6,7 +6,7 @@
         Playing,
         LostNoHigh,
         LostHigh,
-        DisplayScores
-
+        DisplayScores,
+        Options
     }
 }

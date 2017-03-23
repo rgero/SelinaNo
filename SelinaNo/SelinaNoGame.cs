@@ -19,6 +19,7 @@ namespace SelinaNo
         TitleScene titleScene;
         GameScene gameScene;
         EndScene endScene;
+        OptionsScene optionsScene;
 
         GameState currentState;
         ControlScheme currentControls;
@@ -36,6 +37,7 @@ namespace SelinaNo
             titleScene = new TitleScene(this);
             gameScene = new GameScene(this);
             endScene = new EndScene(this);
+            optionsScene = new OptionsScene(this);
             
 
             currentControls = ControlScheme.Mouse;
@@ -112,6 +114,12 @@ namespace SelinaNo
             {
                 endScene.Update();
             }
+
+            if (currentState == GameState.Options)
+            {
+                optionsScene.Update();
+            }
+
             base.Update(gameTime);
         }
 
@@ -140,6 +148,13 @@ namespace SelinaNo
             {
                 GraphicsDevice.Clear(Color.Black);
                 endScene.Draw(spriteBatch, scoreboardFont);
+
+            }
+
+            if (currentState == GameState.Options)
+            {
+                GraphicsDevice.Clear(Color.Black);
+                optionsScene.Draw(spriteBatch, scoreboardFont);
 
             }
 
@@ -179,6 +194,11 @@ namespace SelinaNo
         public void resetGame()
         {
             gameScene.resetGame();
+        }
+
+        public void setVolume(float newVolume)
+        {
+            SoundEffect.MasterVolume = newVolume;
         }
 
     }

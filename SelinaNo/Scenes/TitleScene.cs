@@ -65,7 +65,7 @@ namespace SelinaNo
                                     );
 
             buttonManager.Load(Content);
-            buttonManager.addButton("Testing", 10, 10, GameState.LostNoHigh);
+            buttonManager.addButton("Options", GameConstants.SCREEN_WIDTH /2 , GameConstants.SCREEN_HEIGHT - 100, GameState.Options);
         }
 
         public void Update()
@@ -78,18 +78,6 @@ namespace SelinaNo
             if (Keyboard.GetState().IsKeyDown(Keys.Tab))
             {
                 parent.setState(GameState.Playing);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D1))
-            {
-                complete_ctrl_msg = base_control_msg + "Currently Selected: Mouse";
-                parent.setControls(ControlScheme.Mouse);
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.D2))
-            {
-                complete_ctrl_msg = base_control_msg + "Currently Selected: Keyboard";
-                parent.setControls(ControlScheme.Keyboard);
             }
         }
 
@@ -104,12 +92,6 @@ namespace SelinaNo
             Vector2 size = scoreboardFont.MeasureString(message);
             spriteBatch.DrawString(scoreboardFont, message,
                 new Vector2(GameConstants.SCREEN_WIDTH / 2 - size.X / 2, 3 * GameConstants.SCREEN_HEIGHT / 5), Color.White);
-            if (complete_ctrl_msg != null)
-            {
-                Vector2 stringSize = scoreboardFont.MeasureString(complete_ctrl_msg);
-                Vector2 controlLocation = new Vector2(GameConstants.CONTROL_X - stringSize.X / 2, GameConstants.CONTROL_Y);
-                spriteBatch.DrawString(scoreboardFont, complete_ctrl_msg, controlLocation, Color.DodgerBlue);
-            }
 
             buttonManager.Draw(spriteBatch);
             spriteBatch.Draw(mouseSprite, mouseRectangle, Color.White);
